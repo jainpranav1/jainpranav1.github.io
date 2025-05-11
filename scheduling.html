@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - Task Scheduler</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #timelineTasks {
+        height: 100px;
+        border: 1px solid #fff;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .task {
+        height: 80px;
+        border: 1px solid #fff;
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #timelineBar {
+        height: 20px;
+        border: 1px solid #fff;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .tick {
+        height: 20px;
+        border: 1px solid #fff;
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Task Scheduler</h1>
+      <p>
+        I had an idea to create a task scheduler using the CSS flexbox to plan
+        and visualize my tasks. Take a look at the source code to see how it
+        works.
+      </p>
+
+      <h2>5/11/25 Schedule</h2>
+      <div id="timelineTasks">
+        <div class="task" style="flex: 1; order: 1">Eat Breakfast</div>
+        <div class="task" style="flex: 1; order: 3">Eat Lunch</div>
+        <div class="task" style="flex: 1; order: 5">Eat dinner</div>
+        <div class="task" style="flex: 2; order: 2">Make AWS cards</div>
+        <div class="task" style="flex: 1; order: 4">Do PM Work</div>
+        <div class="task" style="flex: 1; order: 4">Exercise</div>
+        <div class="task" style="flex: 1; order: 4">Clean House</div>
+        <div class="task" style="flex: 2; order: 6">Do Taxes</div>
+      </div>
+      <div id="timelineBar">
+        <div class="tick">8</div>
+        <div class="tick">9</div>
+        <div class="tick">10</div>
+        <div class="tick">11</div>
+        <div class="tick">12</div>
+        <div class="tick">1</div>
+        <div class="tick">2</div>
+        <div class="tick">3</div>
+        <div class="tick">4</div>
+        <div class="tick">5</div>
+        <div class="tick">6</div>
+        <div class="tick">7</div>
+        <div class="tick">8</div>
+      </div>
+    </div>
+  </body>
+</html>
