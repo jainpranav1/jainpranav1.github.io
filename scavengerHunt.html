@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - Task Scheduler</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Scavenger Hunt</h1>
+      <p>
+        To make fitness fun, I decided to make a game out of it. I created a
+        scavenger hunt where I have to find items in my neighborhood. Try it out
+        below!
+      </p>
+      <div id="items"></div>
+
+      <script>
+        // things to find
+        const colors = [
+          "red",
+          "blue",
+          "green",
+          "yellow",
+          "purple",
+          "orange",
+          "pink",
+          "brown",
+          "black",
+          "multicolored",
+        ];
+
+        const patterns = [
+          "striped",
+          "polka-dotted",
+          "plaid",
+          "floral",
+          "geometric",
+          "abstract",
+          "animal print",
+          "tie-dye",
+          "camouflage",
+          "paisley",
+        ];
+
+        const shapes = [
+          "circle",
+          "square",
+          "triangle",
+          "rectangle",
+          "oval",
+          "hexagon",
+          "pentagon",
+          "star",
+          "heart",
+          "diamond",
+        ];
+
+        const textures = [
+          "smooth",
+          "rough",
+          "soft",
+          "hard",
+          "fuzzy",
+          "slippery",
+          "sticky",
+          "sandy",
+        ];
+
+        const functions = [
+          "bouncing",
+          "rolling",
+          "spinning",
+          "floating",
+          "sliding",
+          "swinging",
+          "twisting",
+          "turning",
+        ];
+
+        function randomItem(arr) {
+          randomIndex = Math.floor(Math.random() * arr.length);
+          item = arr[randomIndex];
+          arr.splice(randomIndex, 1);
+          return item;
+        }
+
+        document.querySelector("#items").innerHTML = `
+        <sl-checkbox> Find something with the color "${randomItem(
+          colors
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the pattern "${randomItem(
+          patterns
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the shape "${randomItem(
+          shapes
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the texture "${randomItem(
+          textures
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the function "${randomItem(
+          functions
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the color "${randomItem(
+          colors
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the pattern "${randomItem(
+          patterns
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the shape "${randomItem(
+          shapes
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the texture "${randomItem(
+          textures
+        )}"</sl-checkbox>
+        <sl-checkbox> Find something with the function "${randomItem(
+          functions
+        )}"</sl-checkbox>
+      `;
+      </script>
+    </div>
+  </body>
+</html>
