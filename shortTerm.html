@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - Task Scheduler</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #taskCardContents {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+      }
+    </style>
+    <script defer>
+      window.addEventListener("DOMContentLoaded", () => {
+        taskName = document.getElementById("taskName");
+        taskTime = document.getElementById("taskTime");
+        startTaskBtn = document.getElementById("startTaskBtn");
+        timeRemainingDisplay = document.getElementById("timeRemainingDisplay");
+        taskCompletedBtn = document.getElementById("taskCompletedBtn");
+        giveTimeDisplay = document.getElementById("giveTimeDisplay");
+        niceJobDisplay = document.getElementById("niceJobDisplay");
+        intervalId = null;
+
+        startTaskBtn.addEventListener("click", () => {
+          if (taskName.value === "") {
+            alert("Please enter a task name.");
+            return;
+          }
+
+          taskName.disabled = true;
+          taskTime.disabled = true;
+          startTaskBtn.disabled = true;
+          startTaskBtn.textContent = "Task Started";
+          timeRemainingDisplay.hidden = false;
+          taskCompletedBtn.style.display = "block";
+          niceJobDisplay.hidden = true;
+          timeRemainingDisplay.textContent = `🕐 Time Remaining: ${taskTime.value}:00`;
+          timeRemaining = parseInt(taskTime.value) * 60; // Convert minutes to seconds
+
+          let numberOfTimesGaveTime = 0;
+          intervalId = setInterval(() => {
+            if (timeRemaining <= 0) {
+              timeRemaining += 300; // Add 5 minutes (300 seconds)
+              giveTimeDisplay.hidden = false;
+              numberOfTimesGaveTime++;
+
+              if (numberOfTimesGaveTime > 1) {
+                giveTimeDisplay.textContent = `❤️ Gave you an extra 5 minutes (counter: ${numberOfTimesGaveTime})`;
+              }
+            }
+
+            timeRemaining--;
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = (timeRemaining % 60).toString().padStart(2, "0");
+
+            timeRemainingDisplay.textContent = `🕐 Time Remaining: ${minutes}:${seconds}`;
+          }, 1000); // 1000 ms = 1 second
+        });
+
+        taskCompletedBtn.addEventListener("click", () => {
+          clearInterval(intervalId);
+          taskName.disabled = false;
+          taskTime.disabled = false;
+          startTaskBtn.disabled = false;
+          startTaskBtn.textContent = "🟢 Start Task";
+          timeRemainingDisplay.hidden = true;
+          giveTimeDisplay.hidden = true;
+          taskCompletedBtn.style.display = "none";
+          niceJobDisplay.hidden = false;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Short Term Goal Helper</h1>
+      <p>
+        I often create short-term goals to help me stay focused (ex. finish
+        watching the 3 min lecture video in 7 minutes). Below is a tool that
+        helps me accomplishes these short term goals.
+      </p>
+
+      <sl-card>
+        <div id="taskCardContents">
+          <sl-input id="taskName" label="Task Name" clearable></sl-input>
+          <sl-input
+            id="taskTime"
+            type="number"
+            label="Time Limit (minutes)"
+            value="5"
+            min="1"
+          ></sl-input>
+          <sl-button id="startTaskBtn"> 🟢 Start Task </sl-button>
+          <div id="timeRemainingDisplay" hidden>🕐 Time Remaining:</div>
+          <div id="giveTimeDisplay" hidden>❤️ Gave you an extra 5 minutes</div>
+          <sl-button id="taskCompletedBtn" style="display: none">
+            🏆 Task Completed
+          </sl-button>
+          <div id="niceJobDisplay" hidden>
+            🥳 Nice job! You completed the task! On to the next one.
+          </div>
+        </div>
+      </sl-card>
+    </div>
+  </body>
+</html>
