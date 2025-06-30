@@ -53,8 +53,14 @@
           timeRemainingDisplay.textContent = `🕐 Time Remaining: ${taskTime.value}:00`;
           timeRemaining = parseInt(taskTime.value) * 60; // Convert minutes to seconds
 
+          /*
+          This reason for this complicated time logic is because browser tabs go to sleep
+          when they are not in focus, which will cause a simple timer to not work correctly.
+          */
+
           let numberOfTimesGaveTime = 0;
-          intervalId = setInterval(() => {
+
+          function incrementTimeBySec() {
             if (timeRemaining <= 0) {
               timeRemaining += 300; // Add 5 minutes (300 seconds)
               giveTimeDisplay.hidden = false;
@@ -70,7 +76,23 @@
             const seconds = (timeRemaining % 60).toString().padStart(2, "0");
 
             timeRemainingDisplay.textContent = `🕐 Time Remaining: ${minutes}:${seconds}`;
-          }, 1000); // 1000 ms = 1 second
+          }
+
+          let counter = 0;
+          let prevTime = Date.now();
+          intervalId = setInterval(() => {
+            let currTime = Date.now();
+            let elapsedMs = currTime - prevTime;
+
+            counter += elapsedMs;
+
+            while (counter >= 1000) {
+              incrementTimeBySec();
+              counter -= 1000; // Decrease counter by 1 second
+            }
+
+            prevTime = currTime;
+          }, 10); // 10 ms
         });
 
         taskCompletedBtn.addEventListener("click", () => {
