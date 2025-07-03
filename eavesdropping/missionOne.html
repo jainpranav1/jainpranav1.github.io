@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - Eavesdropping</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #scammerImg {
+        max-width: 300px;
+        width: 100%;
+      }
+
+      .message {
+        max-width: 500px;
+        width: 100%;
+      }
+    </style>
+    <script defer>
+      function caesarCipher(str, shift) {
+        return str
+          .split("")
+          .map((char) => {
+            const code = char.charCodeAt(0);
+
+            // Uppercase letters
+            if (code >= 65 && code <= 90) {
+              return String.fromCharCode(
+                ((((code - 65 + shift) % 26) + 26) % 26) + 65
+              );
+            }
+
+            // Lowercase letters
+            if (code >= 97 && code <= 122) {
+              return String.fromCharCode(
+                ((((code - 97 + shift) % 26) + 26) % 26) + 97
+              );
+            }
+
+            // Non-letters stay the same
+            return char;
+          })
+          .join("");
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        sendBtn = document.getElementById("sendBtn");
+        rewrittenMsg = document.getElementById("rewrittenMsg");
+        recordingContainer = document.getElementById("recordingContainer");
+        recordingTranscript = document.getElementById("recordingTranscript");
+
+        sendBtn.addEventListener("click", () => {
+          if (rewrittenMsg.value.trim() === "") {
+            alert("Please rewrite the message before sending.");
+            return;
+          }
+
+          decryptedRewrittenMsg = caesarCipher(rewrittenMsg.value, -15);
+
+          recordingContainer.hidden = false;
+          recordingTranscript.textContent = decryptedRewrittenMsg;
+
+          const msg = new SpeechSynthesisUtterance(decryptedRewrittenMsg);
+          window.speechSynthesis.speak(msg);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Mission 1: Scamming the Scammers</h1>
+      <img id="scammerImg" src="/eavesdropping/images/scammer.png" alt="" />
+
+      <h2>Background</h2>
+      <p>
+        Encrypted messages from a crime syndicate spanning several Asian
+        countries is raising alarms. The operatives don’t speak fluent English,
+        so they’re outsourcing their scam scripts from a North American network
+        fluent in deceptive language. The scripts contain prewritten dialogues
+        to manipulate victims through phishing, impersonation, and fear tactics.
+      </p>
+      <h2>Assignment</h2>
+      <p>
+        Eve has tapped the underground relay server. A encrypted scam message
+        has been intercepted. Eve thinks the encryption was done using a Caesar
+        Cipher, where all the letters are shifted by a set amount (ex. 2
+        letters, a to c).
+      </p>
+      <p>Your job:</p>
+      <ul>
+        <li>figure out the shift amount</li>
+        <li>
+          create a new message encrypted with the same shift amount and rewrite
+          it with absurd, comedic dialogue to sabotage the scam
+        </li>
+      </ul>
+
+      <p>Make the sender sound ridiculous. Break trust. Inject chaos.</p>
+
+      <sl-button href="https://cryptii.com/pipes/caesar-cipher" target="_blank"
+        >Caesar Cipher Tool</sl-button
+      >
+
+      <h3>Intercepted Message</h3>
+      <sl-card class="message" class="card-basic">
+        Wtaad. X pb rpaaxcv ugdb Bxrgdhdui Itrw Hjeedgi. Ndj wpkt p kxgjh dc
+        ndjg rdbejitg. Eatpht kxhxi iwt ltqhxit bxzgdhduiitzhjeedgi.rd pcs
+        sdlcadps iwt pcixkxgjh egditrixdc.
+      </sl-card>
+
+      <h3>Rewritten Message</h3>
+      <sl-textarea class="message" id="rewrittenMsg"></sl-textarea>
+      <br />
+
+      <sl-button id="sendBtn">Send</sl-button>
+      <div id="recordingContainer" hidden>
+        <h3>Recording Transcript of the Scammer</h3>
+        <sl-card class="message" class="card-basic" id="recordingTranscript">
+        </sl-card>
+      </div>
+    </div>
+  </body>
+</html>
