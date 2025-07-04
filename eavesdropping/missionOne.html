@@ -55,24 +55,49 @@
           .join("");
       }
 
-      window.addEventListener("DOMContentLoaded", () => {
-        sendBtn = document.getElementById("sendBtn");
-        rewrittenMsg = document.getElementById("rewrittenMsg");
-        recordingContainer = document.getElementById("recordingContainer");
-        recordingTranscript = document.getElementById("recordingTranscript");
+      function wait(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
 
-        sendBtn.addEventListener("click", () => {
+      window.addEventListener("DOMContentLoaded", () => {
+        let sendBtn = document.getElementById("sendBtn");
+        let rewrittenMsg = document.getElementById("rewrittenMsg");
+        let recordingContainer = document.getElementById("recordingContainer");
+        let recordingTranscript = document.getElementById(
+          "recordingTranscript"
+        );
+        let sendingText = document.getElementById("sending");
+        let recordingText = document.getElementById("recording");
+
+        sendBtn.addEventListener("click", async () => {
           if (rewrittenMsg.value.trim() === "") {
             alert("Please rewrite the message before sending.");
             return;
           }
+          recordingContainer.hidden = true;
+          sendingText.hidden = true;
+          recordingText.hidden = true;
+
+          sendingText.hidden = false;
+          sendingText.scrollIntoView({ behavior: "smooth" });
+
+          await wait(2000);
+
+          recordingText.hidden = false;
+          recordingText.scrollIntoView({ behavior: "smooth" });
+
+          await wait(2000);
 
           decryptedRewrittenMsg = caesarCipher(rewrittenMsg.value, -15);
-
-          recordingContainer.hidden = false;
           recordingTranscript.textContent = decryptedRewrittenMsg;
 
+          recordingContainer.hidden = false;
+          recordingContainer.scrollIntoView({ behavior: "smooth" });
+
+          await wait(1000);
+
           const msg = new SpeechSynthesisUtterance(decryptedRewrittenMsg);
+          msg.lang = "en-IN";
           window.speechSynthesis.speak(msg);
         });
       });
@@ -93,9 +118,9 @@
       </p>
       <h2>Assignment</h2>
       <p>
-        Eve has tapped the underground relay server. A encrypted scam message
+        Eve has tapped the underground relay server. An encrypted scam message
         has been intercepted. Eve thinks the encryption was done using a Caesar
-        Cipher, where all the letters are shifted by a set amount (ex. 2
+        cipher, where all the letters are shifted by a set amount (ex. 2
         letters, a to c).
       </p>
       <p>Your job:</p>
@@ -125,8 +150,10 @@
       <br />
 
       <sl-button id="sendBtn">Send</sl-button>
+      <p id="sending" hidden>Sending ...</p>
+      <p id="recording" hidden>Recording scammers ...</p>
       <div id="recordingContainer" hidden>
-        <h3>Recording Transcript of the Scammer</h3>
+        <h3>Captured Recording</h3>
         <sl-card class="message" class="card-basic" id="recordingTranscript">
         </sl-card>
       </div>
