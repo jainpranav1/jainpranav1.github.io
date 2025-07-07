@@ -89,7 +89,7 @@
           <p>How does Route 53 create the <code>pranav.com</code> NSs?</p>
           <p>
             In Route 53, you create a hosted zone for the domain
-            <code>pranav.com</code>. This will create NSs for your domain.
+            <code>pranav.com</code>. This will create 4 NSs for your domain.
           </p>
         </li>
       </ul>
