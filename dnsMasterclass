@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - DNS Masterclass</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <script defer type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+    </script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #cy {
+        width: 300px;
+        height: 300px;
+        background: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>DNS / Route 53 Masterclass</h1>
+      <p>
+        I have been studying DNS and Route 53 for the AWS Solutions Architect
+        certification exam. I wanted to create a mini masterclass on DNS and
+        Route 53 to improve my understanding through teaching. The result is
+        below. Enjoy!
+      </p>
+      <h2>DNS / Route 53 Video</h2>
+      <p>
+        Below is a video by AWS on DNS and Route 53. Start by watching the below
+        video. I will include my notes below the video.
+      </p>
+      <!-- <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/e2xLV7pCOLI?si=y_wGTfvujQLj8qlx"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe> -->
+
+      <pre class="mermaid">
+            flowchart LR
+                client[Client]
+                client --www\.pranav.com?--> resolver[DNS Resolver]
+                root[Root NS]
+                resolver --www\.pranav.com?--> root
+                root --\.com NS IP--> resolver
+                com[.com NS]
+                resolver --www\.pranav.com?--> com
+                com --pranav\.com NS IP--> resolver
+                pranav_com[pranav.com NS - Route 53]
+                resolver --www\.pranav.com?--> pranav_com
+                pranav_com --1.2.3.4--> resolver
+                resolver --1.2.3.4--> client
+                server[Web Server - 1.2.3.4]
+                client --GET--> server
+    </pre
+      >
+    </div>
+  </body>
+</html>
