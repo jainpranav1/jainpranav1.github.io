@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*
+        To apply the following matrix:
+          | a c |
+          | b d |
+        
+        type the following:
+          transform: matrix(a, b, c, d, 0, 0)
+      */
+
+      .scaryPic {
+        width: 200px;
+        margin-left: 125px;
+        margin-top: 200px;
+      }
+
+      #transformPic {
+        transform-origin: center;
+
+        /*
+          do nothing
+          | 1 0 |
+          | 0 1 |
+          
+        */
+        /* transform: matrix(1, 0, 0, 1, 0, 0); */
+
+        /*
+          scale horizontally by 2
+          | 2 0 |
+          | 0 1 |
+          
+        */
+        /* transform: matrix(2, 0, 0, 1, 0, 0); */
+
+        /*
+          scale vertically by 2
+          | 1 0 |
+          | 0 2 |
+          
+        */
+        /* transform: matrix(1, 0, 0, 2, 0, 0); */
+
+        /*
+          shear horizontally with a shear factor of 0.5
+          | 1 0.5 |
+          | 0 1   |
+          
+        */
+        /* transform: matrix(1, 0, 0.5, 1, 0, 0); */
+
+        /*
+          shear vertically with a shear factor of 0.5
+          | 1   0 |
+          | 0.5 1 |
+          
+        */
+        /* transform: matrix(1, 0.5, 0, 1, 0, 0); */
+
+        /*
+          rotate by 90 degree (pi/2 radians)
+          | cos(pi/2) -sin(pi/2) |
+          | sin(pi/2)  cos(pi/2) |
+        */
+        /*         
+        transform: matrix(
+          calc(cos(pi/2)),
+          calc(sin(pi/2)),
+          calc(sin(pi/2) * -1),
+          calc(cos(pi/2)),
+          0,
+          0
+        );
+        */
+
+        /*
+          multiple transformations
+          
+          first, scale vertically by 2
+          second, scale horizontally by 1.5
+          | 1.5 0 |  | 1 0 |
+          | 0   1 |  | 0 2 |
+        */
+        /* transform: matrix(1.5, 0, 0, 1, 0, 0) matrix(1, 0, 0, 2, 0, 0); */
+
+        /*
+          determinant of 0
+          | 1 1 |
+          | 1 1 |
+        */
+        /* transform: matrix(1, 1, 0.9, 1, 0, 0); */
+        /* transform: matrix(1, 1, 0.99, 1, 0, 0); */
+        /* transform: matrix(1, 1, 1, 1, 0, 0); */
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      class="scaryPic"
+      src="https://upload.wikimedia.org/wikipedia/commons/3/32/Portrait_of_Shel_Silverstein_in_c._1964_by_Jerry_Yulsman.jpg"
+    />
+    <img
+      class="scaryPic"
+      id="transformPic"
+      src="https://upload.wikimedia.org/wikipedia/commons/3/32/Portrait_of_Shel_Silverstein_in_c._1964_by_Jerry_Yulsman.jpg"
+    />
+  </body>
+</html>
