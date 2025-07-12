@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - Task Scheduler</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #awsConcepts {
+        display: flex;
+        flex-direction: column;
+        max-width: 800px;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>AWS Short List</h1>
+      <p>
+        As I have been studying AWS, I wanted to create a short summary on each
+        AWS concept that I have learned. Here is a collection of those
+        summaries.
+      </p>
+      <div id="awsConcepts">
+        <sl-details summary="Snow Family">
+          AWS provides physical devices for migrating large amounts of data and
+          performing local compute in areas with limited internet access.
+          Members of the snow family include Snowcone, Snowball, and Snowmobile.
+        </sl-details>
+        <sl-details summary="FSx">
+          FSx enables users to run third party file systems, such as Windows
+          File Server and Lustre, as a managed AWS service.
+        </sl-details>
+        <sl-details summary="Storage Gateway">
+          Storage gateways create a bridge between an on-premise datacenter and
+          S3-based storage. The gateway comes in a file based, block based
+          (volume), and tape based flavor.
+        </sl-details>
+        <sl-details summary="Transfer">
+          AWS Transfer provides a service for transferring files in and out of
+          S3 and EFS using protocols such as SFTP, FTPS, and FTP.
+        </sl-details>
+        <sl-details summary="Data Sync">
+          Data Sync is a service for transferring massive amounts of data
+          between AWS services or between AWS and on-premise. Services supported
+          include S3, EFS, and FSx.
+        </sl-details>
+      </div>
+    </div>
+  </body>
+</html>
