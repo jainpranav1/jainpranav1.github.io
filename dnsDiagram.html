@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - DNS Masterclass</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <script defer type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+    </script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>DNS Diagram</h1>
+      <p>
+        I have been studying DNS recently. I created a diagram using Mermaid
+        below illustrating how DNS works. Check out the source code!
+      </p>
+
+      <pre class="mermaid">
+            flowchart LR
+                client[Client]
+                client --www\.pranav.com IP?--> resolver[DNS Resolver]
+                root[Root NS - 2.3.4.5]
+                resolver --.com NS IP?--> root
+                root --3.4.5.6--> resolver
+                com[.com NS - 3.4.5.6]
+                resolver --pranav.com NS IP?--> com
+                com --4.5.6.7--> resolver
+                pranav_com[pranav.com NS - 4.5.6.7 - Route 53]
+                resolver --www\.pranav.com IP?--> pranav_com
+                pranav_com --1.2.3.4--> resolver
+                resolver --1.2.3.4--> client
+                server[Web Server - 1.2.3.4]
+                client --GET--> server
+                server --HTML--> client
+      </pre>
+    </div>
+  </body>
+</html>
