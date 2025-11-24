@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PIP - Features</title>
+    <title>PIP - Properties</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
@@ -31,14 +31,15 @@
     <div id="main">
       <h1>Features</h1>
       <p>
-        Features are a deceptively simple concept in machine learning. In this
+        Properties are a deceptively simple concept. Understanding properties
+        can help with understanding features in machine learning. In this
         article, I would like to go through the different ways I have thought
-        about features.
+        about properties.
       </p>
       <h2>Table Perspective</h2>
       <p>
-        One way to think about features are as column headers. Consider a table
-        of data:
+        One way to think about properties are as column headers. Consider a
+        table of data:
       </p>
       <table>
         <tr>
@@ -64,13 +65,16 @@
       </table>
 
       <p>
-        The "features" here are the column headers. In particular, they are the
-        words themselves and nothing else (later we will discuss perspectives
-        where a feature is more than just some text on a page).
+        The "properties" here are the column headers. In particular, they are
+        the words themselves and nothing else (later we will discuss
+        perspectives where a property is more than just some text on a page). In
+        machine learning, we can define properties whose data is used as input
+        to an ML model as "features". The properties whose data is used as
+        output can be defined as "targets".
       </p>
 
       <p>
-        Features are generally descriptive enough that one can understand the
+        Properties are generally descriptive enough that one can understand the
         meaning of the data in their column. However, one can use have
         non-descriptive features, as exemplified below. The meaning of the data
         will have to be explained separately.
