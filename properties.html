@@ -12,6 +12,10 @@
       type="module"
       src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
     ></script>
+    <script defer type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+    </script>
     <style>
       #main {
         margin-left: 10px;
@@ -101,6 +105,44 @@
           <td>28</td>
         </tr>
       </table>
+
+      <h2>Function Perspective</h2>
+
+      <p>
+        Another way to think about properties are as a function. A function is
+        just an assignment between two sets where each element of the first set
+        is assigned to exactly one element in the second set. An example of the
+        property "height" is shown below. Height maps elements from the set
+        "People" to the set "Heights".
+      </p>
+      <pre class="mermaid">
+            flowchart LR
+                subgraph people ["People"]
+                  mary[Mary]
+                  john[John]
+                  matthew[Matthew]
+                end
+
+                subgraph heights ["Heights"]
+                  65in[65 inches]
+                  68in[68 inches]
+                  70in[70 inches]
+                end
+
+                mary --> 65in
+                john --> 65in
+                matthew --> 70in
+      </pre>
+
+      <p>
+        In Machine Learning, we can define features as those properties whose
+        outputs are used as inputs to an ML model. Targets are those properties
+        whose outputs are used as outputs of an ML model.
+      </p>
+      <p>
+        This way of thinking about properties is pretty similar to the way that
+        a random variable is thought about in probability theory.
+      </p>
     </div>
   </body>
 </html>
