@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" class="sl-theme-dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIP - Properties</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" />
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <script defer type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+  <style>
+    #main {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid white;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+
+    #qrCode {
+      width: 300px;
+    }
+
+    #redSquare {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+
+    #greenSquare {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <h1>Properties</h1>
+    <p>
+      Properties are a deceptively simple concept. Understanding properties
+      can help with understanding features in machine learning. In this
+      article, I would like to go through the different ways I have thought
+      about properties.
+    </p>
+    <p>
+      One fascinating thing I have noticed about properties is that when discussing
+      properties with people while focused on a specific domain, properties feel so
+      natural that they don't need explaining - we just bring them up and use them.
+      For example when discussing with my father (a physician) about cancer, we talked
+      about the property of "tumor size" very naturally. Only when I am studying ML on
+      my own do questions arise about what properties really are. I think it stems from
+      the fact that in ML, we think about properties (really features and targets) in a more
+      abstract way divorced from any specific domain.
+    </p>
+
+    <h2>Table Perspective</h2>
+    <p>
+      One way to think about properties are as column headers. Consider a
+      table of data:
+    </p>
+    <table>
+      <tr>
+        <th>Height (inches)</th>
+        <th>Weight (pounds)</th>
+        <th>Age (years)</th>
+      </tr>
+      <tr>
+        <td>65</td>
+        <td>150</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td>70</td>
+        <td>180</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>68</td>
+        <td>160</td>
+        <td>28</td>
+      </tr>
+    </table>
+
+    <p>
+      The "properties" here are the column headers. In particular, they are
+      the words themselves and nothing else (later we will discuss
+      perspectives where a property is more than just some text on a page). In
+      machine learning, we can define properties whose data is used as input
+      to an ML model as "features". The properties whose data is used as
+      output can be defined as "targets".
+    </p>
+
+    <p>
+      Properties are generally descriptive enough that one can understand the
+      meaning of the data in their column. However, one can use have
+      non-descriptive properties, as exemplified below. The meaning of the
+      data will have to be explained separately.
+    </p>
+    <table>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+      </tr>
+      <tr>
+        <td>65</td>
+        <td>150</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td>70</td>
+        <td>180</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>68</td>
+        <td>160</td>
+        <td>28</td>
+      </tr>
+    </table>
+
+    <h2>Function Perspective</h2>
+
+    <p>
+      Another way to think about properties are as a function. A function is
+      just an assignment between two sets where each element of the first set
+      is assigned to exactly one element in the second set. An example of the
+      property "height" is shown below. Height maps elements from the set
+      "People" to the set "Heights".
+    </p>
+    <pre class="mermaid">
+            flowchart LR
+                subgraph people ["People"]
+                  mary[Mary]
+                  john[John]
+                  matthew[Matthew]
+                end
+
+                subgraph heights ["Heights"]
+                  65in[65 inches]
+                  68in[68 inches]
+                  70in[70 inches]
+                end
+
+                mary --> 65in
+                john --> 65in
+                matthew --> 70in
+      </pre>
+
+    <p>
+      In Machine Learning, we can define features as those properties whose
+      outputs are used as inputs to an ML model. Targets are those properties
+      whose outputs are used as outputs of an ML model.
+    </p>
+    <p>
+      This way of thinking about properties is pretty similar to the way that
+      a random variable is thought about in probability theory.
+    </p>
+  </div>
+
+
+  <h2>Axis Perspective</h2>
+
+  <p>
+    Another way to think of properties are as axes in a coordinate system.
+    Say you have a 3d coordinate system. You can think of the x-axis as the
+    property "height", the y-axis as the property "weight", and the z-axis
+    as the property "age". In this perspective, each person is represented
+    as a point in the 3d space.
+  </p>
+
+
+  <h2>Instantiation Perspective</h2>
+
+  <p>
+    Another way to think about properties are that they are a mental concept
+    that can be instantiated. For example, consider the property "height".
+    Height is a concept. Instances of "height" are specific heights like 64 inches,
+    70 inches, etc. Note that the term "height" is being used as a common noun and
+    proper noun here. I think that this perspective is more abstract, yet it is the
+    one closest to what is used in everyday life.
+  </p>
+
+
+  <h2>Abstraction Perspective</h2>
+
+  <p>
+    I came up with another way of thinking about properties after chatting
+    with copilot. This perspective is quite layered, so I will share with
+    a story.
+  </p>
+  <p>
+    We start with a group of early humans.
+    These early humans receive a barrage of sensory input - colors, textures,
+    tastes, sounds. The picture below (a snippet of a QR code) visually represents
+    this idea.
+  </p>
+  <img src="/properties/images/qrCode.png" id="qrCode" />
+  <p>
+    The human mind automatically draws dividing lines within this sensory input.
+    Rather than experiencing unbearable sensory input, these humans experience
+    trees, rocks, animals. We refer to the results of taking the sensory input and
+    drawing clear boundary lines as "objects". Objects are basically groups of sensory input.
+    Look around the room you are currently
+    in! You, like the early human, will automatically start to see a chair, TV, a backpack.
+    However, if you look at your wall, you may not see any clear boundary - more like white
+    noise. What is within each of the boundaries is an object.
+  </p>
+  <p>
+    Nothing stops humans from creating new objects. Looking at your wall, you can group
+    several bumps close to one another and construct an object. Also, humans can experience
+    more than just sensory input. They are capable of mental experience as well. We will expand
+    the definition of "objects" to include groups of mental experience.
+  </p>
+  <p>
+    The early humans recognize that
+    many of the objects they experience in the world around them
+    are quite similar to another. Many of the apples give
+    them a similar experience to the following square:
+  </p>
+  <div id="redSquare"></div>
+  <p>
+    Other apples provide a similar experience to the
+    following square:
+  </p>
+    <div id="greenSquare"></div>
+  <p>
+    The humans abstract the similarity into its own object
+    (a mental one in this case). One object is labelled as red.
+    One is labelled as green. We can call these abstractions of similar
+    objects as "abstracts".
+  </p>
+  <p>
+    The early humans also notice that many of these abstracts are similar to one another.
+    Red, blue, green, orange, etc. all are visual mental experiences. The early humans
+    group them together and call the group "color".
+  </p>
+  <p>
+    We define a group of similar abstracts as an "abstract group".
+    For each object, we can look
+    through many abstract groups and find suitable abstracts for the object. For example,
+    for an apple, we can look through "color" and find "red". We can look through weight
+    and find "light".
+  </p>
+  <p>
+    Building on this, one could make a machine that takes in an object into an input slot,
+    processed the object, and outputs an abstract of an abstract group into an output slot.
+    We call this machine an abstract machine.
+  </p>
+  <p>
+    Now, after all that 😅, what is a property? One way to think about a property is as
+    an abstract group. This is probably the most intutive way of thinking.
+    The values of that property are then abstracts. Another way
+    to think about a property is as an abstract machine. This is similar to how we think
+    about random variables in probability theory.
+    Lastly, a way to think about a
+    property is as the output slot of an abstract machine. This is a great way of thinking about
+    properties that captures the idea that properties change from object to object (the value the
+    property is holding changes). This seems like a great way to think about "variables".
+  </p>
+  </div>
+  </div>
+</body>
+
+</html>
