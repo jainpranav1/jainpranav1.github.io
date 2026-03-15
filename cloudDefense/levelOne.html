@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP - Eavesdropping</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/rete/rete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rete-area-plugin/rete-area-plugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rete-connection-plugin/rete-connection-plugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rete-render-utils/rete-render-utils.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rete-react-plugin/rete-react-plugin.min.js"></script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #gameCover {
+        max-width: 300px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Wave 1</h1>
+      <p>
+        Zap, a QR code generator, is Stratosphere Technologies newest application.
+        A user makes an HTTP POST request to Zap containing information such as:
+        <ul>
+          <li>URL to be converted (ex. www.example.com)</li>
+          <li>Desired QR code color (ex. #000000)</li>
+          <li>Desired size of QR code image (ex. 512 × 512 px) </li>
+        </ul>
+        The user then received an HTTP POST response containing a PNG of the desired QR code.
+      </p>
+      <p>
+        Zap currently runs on a single virtual machine deployed on Cumulus Cloud (Cumulus is the
+        leading cloud provider in the world). A virtual machine is basically a slice of a
+        server's hardware that has its own operating system (ex. Windows, Linux) and can run applications (watch the
+        animated <a href="https://www.youtube.com/watch?v=eyNBf1sqdBQ" target="_blank">Virtual Machines
+        vs Containers</a> to learn more).
+      </p>
+    </div>
+  </body>
+</html>
