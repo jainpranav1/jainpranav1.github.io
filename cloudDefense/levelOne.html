@@ -12,22 +12,55 @@
       type="module"
       src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/rete/rete.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/rete-area-plugin/rete-area-plugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/rete-connection-plugin/rete-connection-plugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/rete-render-utils/rete-render-utils.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/rete-react-plugin/rete-react-plugin.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.js"></script>
     <style>
       #main {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 50px;
+        margin-right: 50px;
       }
 
-      #gameCover {
-        max-width: 300px;
+     #drawflow {
         width: 100%;
-      }
+        height: 400px;
+        background-color: darkolivegreen;
+    }
+
+    .drawflow .connection .main-path {
+        stroke: #00ff88; /* Request color */
+        stroke-width: 3px;
+        stroke-dasharray: 5; /* This creates the "dots" */
+        animation: dash 1s linear infinite;
+    }
+
+    @keyframes dash {
+        from { stroke-dashoffset: 20; }
+        to { stroke-dashoffset: 0; }
+    }
+
+    /* Basic Node Styling */
+    .drawflow-node {
+        background: #444;
+        color: white;
+        border: 1px solid #666;
+        border-radius: 8px;
+        padding: 10px;
+    }
     </style>
+    <script defer>
+      window.addEventListener("DOMContentLoaded", () => {
+        var id = document.getElementById("drawflow");
+        const editor = new Drawflow(id);
+        editor.start();
+
+        var html = `
+        <div><input type="text" df-name></div>
+        `;
+        var data = { "name": '' };
+
+        editor.addNode('github', 0, 1, 150, 300, 'github', data, html);
+      });
+    </script>
   </head>
   <body>
     <div id="main">
@@ -49,6 +82,7 @@
         animated <a href="https://www.youtube.com/watch?v=eyNBf1sqdBQ" target="_blank">Virtual Machines
         vs Containers</a> to learn more).
       </p>
+      <div id="drawflow"></div>
     </div>
   </body>
 </html>
