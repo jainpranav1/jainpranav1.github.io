@@ -26,16 +26,38 @@
 
         var canvas = new LGraphCanvas("#mycanvas", graph);
 
-        var node_const = LiteGraph.createNode("basic/const");
-        node_const.pos = [200,200];
-        graph.add(node_const);
-        node_const.setValue(4.5);
+      //node constructor class
+      function MyAddNode()
+      {
+        this.addInput("A","number");
+        this.addInput("B","number");
+        this.addOutput("A+B","number");
+        this.properties = { precision: 1 };
+      }
 
-        var node_watch = LiteGraph.createNode("basic/watch");
-        node_watch.pos = [700,200];
-        graph.add(node_watch);
+      //name to show
+      MyAddNode.title = "Sum";
 
-        node_const.connect(0, node_watch, 0 );
+      //function to call when the node is executed
+      MyAddNode.prototype.onExecute = function()
+      {
+        var A = this.getInputData(0);
+        if( A === undefined )
+          A = 0;
+        var B = this.getInputData(1);
+        if( B === undefined )
+          B = 0;
+        this.setOutputData( 0, A + B );
+      }
+
+      //register in the system
+      LiteGraph.registerNodeType("basic/sum", MyAddNode );
+
+
+
+        var node_sum = LiteGraph.createNode("basic/sum");
+        node_sum.pos = [200,200];
+        graph.add(node_sum);
 
         graph.start();
       });
@@ -52,21 +74,31 @@
           <li>Desired QR code color (ex. #000000)</li>
           <li>Desired size of QR code image (ex. 512 × 512 px) </li>
         </ul>
-        The user then received an HTTP POST response containing a PNG of the desired QR code.
+        The user then receives an HTTP POST response containing a PNG of the desired QR code.
       </p>
       <p>
         Zap is not yet deployed to the public. Skye, the project manager of Zap, is trying
         to figure out what to price each request at so the company can make a profit.
-        She has performed a study where she recorded the usage of the Zap application by 50 users
-        over a month. Rain plans to use the user recording to think of a sufficient cloud architecture
-        for Zap. He also wants to help Skye figure out what price to assign requests.
+        She has performed a study where she recorded the usage of the Zap application by a pilot group of
+        50 users for a month.
       </p>
       <p>
-        Rain is the developer of Jetstream, a cloud simulation tool, that allows cloud architects
+        While the pilot group had only 50 users, Skye expects that Zap will have around
+        1000 users when it is deployed to the public. To account for unexpected demand, she has 
+        created a synthetic user recording that simulates 5000 users based on the original recording.
+      </p>
+      <p>
+        Rain plans to use the synthetic user recording to think of a sufficient cloud architecture
+        to recommend to the software team. He also wants to help Skye figure out what price to assign requests.
+        Rain also happens to be the developer of Jetstream, a cloud simulation tool, that allows cloud architects
         to test out cloud ideas (his work on Jetstream was one of the main reasons
-        Stratosphere hired him). Based on his cursory analysis of the user recording, he
+        Stratosphere hired him).
+      </p>
+      <p>
+        Based on his cursory analysis of the user recording, he
         thinks a virtual machine deployed on Cumulus Cloud, the world's leading cloud provider,
-        will be able to handle the requests.
+        will be able to handle the requests. He wants to test this out on Jetstream before
+        making his recommendations to Skye and the software team.
       </p>
       <!--
         A virtual machine is
