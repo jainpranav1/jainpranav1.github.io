@@ -22,44 +22,39 @@
     </style>
     <script defer>
       window.addEventListener("DOMContentLoaded", () => {
-        var graph = new LGraph();
+        
+        let graph = new LGraph();
+        let canvas = new LGraphCanvas("#mycanvas", graph);
 
-        var canvas = new LGraphCanvas("#mycanvas", graph);
+        function RequestGenerator()
+        {
+          this.addOutput("Request","boolean");
+        }
 
-      //node constructor class
-      function MyAddNode()
-      {
-        this.addInput("A","number");
-        this.addInput("B","number");
-        this.addOutput("A+B","number");
-        this.properties = { precision: 1 };
-      }
+        RequestGenerator.prototype.onExecute = function() {
+          let requestActive = Math.random() < 0.3;
 
-      //name to show
-      MyAddNode.title = "Sum";
+          this.setOutputData(0, requestActive);
 
-      //function to call when the node is executed
-      MyAddNode.prototype.onExecute = function()
-      {
-        var A = this.getInputData(0);
-        if( A === undefined )
-          A = 0;
-        var B = this.getInputData(1);
-        if( B === undefined )
-          B = 0;
-        this.setOutputData( 0, A + B );
-      }
+          this.setDirtyCanvas(true);
+        }
 
-      //register in the system
-      LiteGraph.registerNodeType("basic/sum", MyAddNode );
+        RequestGenerator.title = "Request Generator"
+
+        LiteGraph.registerNodeType("simulation/requestGen", RequestGenerator);
 
 
+        let reqGenNode = LiteGraph.createNode("simulation/requestGen");
+        reqGenNode.pos = [200,200];
+        graph.add(reqGenNode);
 
-        var node_sum = LiteGraph.createNode("basic/sum");
-        node_sum.pos = [200,200];
-        graph.add(node_sum);
+        var node_watch = LiteGraph.createNode("basic/watch");
+         node_watch.pos = [700,200];
+         graph.add(node_watch);
+         
+         reqGenNode.connect(0, node_watch, 0 );
 
-        graph.start();
+        graph.start(1000);
       });
     </script>
   </head>
