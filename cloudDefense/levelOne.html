@@ -43,16 +43,56 @@
 
         LiteGraph.registerNodeType("simulation/requestGen", RequestGenerator);
 
+        function VirtualMachine() {
+            this.addInput("in", "boolean");
+            this.addOutput("processed", "number");
+            this.addOutput("rejected", "number");
+            this.addOutput("load", "number");
+            
+            this.properties = { 
+                capacity: 5,
+                process_time_ms: 500 
+            };
+            
+            this.internal_load = 0;
+            this.total_rejected = 0;
+            this.total_processed = 0;
+        }
+
+        VirtualMachine.prototype.onExecute = function() {
+            let incoming = this.getInputData(0);
+
+            if (incoming) {
+                if (this.internal_load < this.properties.capacity) {
+                    // Accept Request
+                    this.internal_load++;
+                    
+                    // Simulate processing time: Reduce load after delay
+                    setTimeout(() => {
+                        this.internal_load = Math.max(0, this.internal_load - 1);
+                        this.total_processed++
+                    }, this.properties.process_time_ms);
+                } else {
+                    // Reject Request
+                    this.total_rejected++;
+                }
+            }
+
+            this.setOutputData(0, this.total_processed);
+            this.setOutputData(1, this.total_rejected);
+            this.setOutputData(2, this.internal_load);
+        };
+
+        LiteGraph.registerNodeType("simulation/virtual_machine", VirtualMachine);
+
 
         let reqGenNode = LiteGraph.createNode("simulation/requestGen");
         reqGenNode.pos = [200,200];
         graph.add(reqGenNode);
 
-        var node_watch = LiteGraph.createNode("basic/watch");
-         node_watch.pos = [700,200];
-         graph.add(node_watch);
-         
-         reqGenNode.connect(0, node_watch, 0 );
+        var vmNode = LiteGraph.createNode("simulation/virtual_machine");
+        vmNode.pos = [700,200];
+        graph.add(vmNode);
 
         graph.start(1000);
       });
