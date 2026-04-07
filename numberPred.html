@@ -17,6 +17,18 @@
         margin-left: 10px;
         margin-right: 10px;
       }
+
+      #gameCardContents {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+      }
+
+      #sequenceDisplay {
+        text-align: center;
+      }
     </style>
     <script defer>
       /*
@@ -108,18 +120,46 @@
         return r;
       }
 
-      for (let i = 0; i <= 10; i++) {
-        console.log(digSumSeq(4, i));
+      // random integer between min and max
+      // min and max are integers (+, -, 0)
+      function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
       }
 
-      //   window.addEventListener("DOMContentLoaded", () => {
-      //   });
+      window.addEventListener("DOMContentLoaded", () => {
+        let sequenceDisplay = document.getElementById("sequenceDisplay");
+        let answerDisplay = document.getElementById("answerDisplay");
+
+        let start = randomInt(-10, 10);
+        let addVal = randomInt(-10, 10);
+
+        let sequence = [];
+        for (let i = 0; i < 5; i++) {
+          sequence.push(addSeq(start, i, addVal));
+        }
+
+        sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
+
+        answer = [
+          addSeq(start, 5, addVal),
+          addSeq(start, 6, addVal),
+          addSeq(start, 7, addVal),
+        ].join(", ");
+        answerDisplay.innerText = answer;
+      });
     </script>
   </head>
   <body>
     <div id="main">
       <h1>Number Prediction Game</h1>
       <p>Background</p>
+      <sl-card>
+        <div id="gameCardContents">
+          <div id="sequenceDisplay"></div>
+          <sl-details id="answerDisplay" summary="See Answer"></sl-details>
+          <sl-button onclick="window.location.reload()"> New Puzzle </sl-button>
+        </div>
+      </sl-card>
     </div>
   </body>
 </html>
