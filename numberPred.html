@@ -164,7 +164,7 @@
         - digSumSeq
         */
 
-        let seqType = randomInt(0, 3);
+        let seqType = randomInt(0, 5);
 
         if (seqType == 0) {
           // addSeq
@@ -285,7 +285,7 @@
         } else if (seqType == 5) {
           // digSumSeq
 
-          let start = randomInt(-30, 30);
+          let start = randomInt(10, 50);
 
           let sequence = [];
           for (let i = 0; i < 5; i++) {
@@ -311,7 +311,6 @@
   <body>
     <div id="main">
       <h1>Number Prediction Game</h1>
-      <p>Background</p>
       <sl-card>
         <div id="gameCardContents">
           <div id="sequenceDisplay"></div>
