@@ -41,6 +41,10 @@
         return start + addVal * i;
       }
 
+      function addSeqExplan(start, addVal) {
+        return `Start at ${start}. Add by ${addVal} continuously.`;
+      }
+
       /*
         1, 2, 4, 7, 11 (start at 1, add by 1, 2, 3, 4 ...)
         4, 7, 13, 22, 34 (start at 4, add by 3, 6, 9, 12)
@@ -53,6 +57,10 @@
           r += addSeq(startAddSeq, j, addVal);
         }
         return r;
+      }
+
+      function incAddSeqExplan(start, startAddSeq, addVal) {
+        return `Start at ${start}. Add by the sequence ${startAddSeq}, ${startAddSeq + addVal}, ${startAddSeq + 2 * addVal}, ${startAddSeq + 3 * addVal}, ${startAddSeq + 4 * addVal}, ...`;
       }
 
       /*
@@ -130,22 +138,65 @@
         let sequenceDisplay = document.getElementById("sequenceDisplay");
         let answerDisplay = document.getElementById("answerDisplay");
 
-        let start = randomInt(-10, 10);
-        let addVal = randomInt(-10, 10);
+        /*
+        - addSeq
+        - incAddSeq
+        - multSeq
+        - incMultSeq
+        - incFibSeq
+        - digSumSeq
+        */
 
-        let sequence = [];
-        for (let i = 0; i < 5; i++) {
-          sequence.push(addSeq(start, i, addVal));
+        let seqType = randomInt(0, 1);
+
+        if (seqType == 0) {
+          // addSeq
+
+          let start = randomInt(-10, 10);
+          let addVal = randomInt(-10, 10);
+
+          let sequence = [];
+          for (let i = 0; i < 5; i++) {
+            sequence.push(addSeq(start, i, addVal));
+          }
+
+          sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
+
+          answer = [
+            addSeq(start, 5, addVal),
+            addSeq(start, 6, addVal),
+            addSeq(start, 7, addVal),
+          ].join(", ");
+          answerDisplay.innerText = `
+            Answer: ${answer}
+
+            Explanation: ${addSeqExplan(start, addVal)}
+          `;
+        } else if (seqType == 1) {
+          // incAddSeq
+
+          let start = randomInt(-10, 10);
+          let startAddSeq = randomInt(-10, 10);
+          let addVal = randomInt(-10, 10);
+
+          let sequence = [];
+          for (let i = 0; i < 5; i++) {
+            sequence.push(incAddSeq(start, startAddSeq, i, addVal));
+          }
+
+          sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
+
+          answer = [
+            incAddSeq(start, startAddSeq, 5, addVal),
+            incAddSeq(start, startAddSeq, 6, addVal),
+            incAddSeq(start, startAddSeq, 7, addVal),
+          ].join(", ");
+          answerDisplay.innerText = `
+            Answer: ${answer}
+
+            Explanation: ${incAddSeqExplan(start, startAddSeq, addVal)}
+          `;
         }
-
-        sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
-
-        answer = [
-          addSeq(start, 5, addVal),
-          addSeq(start, 6, addVal),
-          addSeq(start, 7, addVal),
-        ].join(", ");
-        answerDisplay.innerText = answer;
       });
     </script>
   </head>
