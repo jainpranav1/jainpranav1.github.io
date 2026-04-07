@@ -109,6 +109,10 @@
         return r;
       }
 
+      function incFibSeqExplan(start) {
+        return `Start at ${start}. Add by the Fibonacci sequence 1, 1, 2, 3, 5, 8, ...`;
+      }
+
       function digSum(num) {
         let r = 0;
         digList = num.toString().split("").map(Number);
@@ -156,7 +160,7 @@
         */
 
         // let seqType = randomInt(0, 3);
-        let seqType = 3;
+        let seqType = 4;
 
         if (seqType == 0) {
           // addSeq
@@ -251,6 +255,28 @@
             Answer: ${answer}
 
             Explanation: ${incMultSeqExplan(start, startMultSeq, multVal)}
+          `;
+        } else if (seqType == 4) {
+          // incFibSeq
+
+          let start = randomInt(-10, 10);
+
+          let sequence = [];
+          for (let i = 0; i < 5; i++) {
+            sequence.push(incFibSeq(start, i));
+          }
+
+          sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
+
+          answer = [
+            incFibSeq(start, 5),
+            incFibSeq(start, 6),
+            incFibSeq(start, 7),
+          ].join(", ");
+          answerDisplay.innerText = `
+            Answer: ${answer}
+
+            Explanation: ${incFibSeqExplan(start)}
           `;
         }
       });
