@@ -86,6 +86,10 @@
         return r;
       }
 
+      function incMultSeqExplan(start, startMultSeq, multVal) {
+        return `Start at ${start}. Add by the sequence ${startMultSeq}, ${startMultSeq * multVal}, ${startMultSeq * multVal ** 2}, ${startMultSeq * multVal ** 3}, ${startMultSeq * multVal ** 4}, ...`;
+      }
+
       // 1, 1, 2, 3, 5, 8, 13, ...
       // i <- 0, 1, 2, 3, ...
       function fibSeq(i) {
@@ -151,7 +155,8 @@
         - digSumSeq
         */
 
-        let seqType = randomInt(0, 2);
+        // let seqType = randomInt(0, 3);
+        let seqType = 3;
 
         if (seqType == 0) {
           // addSeq
@@ -201,7 +206,7 @@
             Explanation: ${incAddSeqExplan(start, startAddSeq, addVal)}
           `;
         } else if (seqType == 2) {
-          // incAddSeq
+          // multSeq
 
           let start = randomInt(-3, 3);
           let multVal = randomInt(-3, 3);
@@ -222,6 +227,30 @@
             Answer: ${answer}
 
             Explanation: ${multSeqExplan(start, multVal)}
+          `;
+        } else if (seqType == 3) {
+          // incMultSeq
+
+          let start = randomInt(-10, 10);
+          let startMultSeq = randomInt(-3, 3);
+          let multVal = randomInt(-3, 3);
+
+          let sequence = [];
+          for (let i = 0; i < 5; i++) {
+            sequence.push(incMultSeq(start, startMultSeq, i, multVal));
+          }
+
+          sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
+
+          answer = [
+            incMultSeq(start, startMultSeq, 5, multVal),
+            incMultSeq(start, startMultSeq, 6, multVal),
+            incMultSeq(start, startMultSeq, 7, multVal),
+          ].join(", ");
+          answerDisplay.innerText = `
+            Answer: ${answer}
+
+            Explanation: ${incMultSeqExplan(start, startMultSeq, multVal)}
           `;
         }
       });
