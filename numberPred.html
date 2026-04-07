@@ -73,6 +73,10 @@
         return start * multVal ** i;
       }
 
+      function multSeqExplan(start, multVal) {
+        return `Start at ${start}. Multiply by ${multVal} continuously.`;
+      }
+
       // i <- 0, 1, 2, 3, ...
       function incMultSeq(start, startMultSeq, i, multVal) {
         let r = start;
@@ -147,7 +151,7 @@
         - digSumSeq
         */
 
-        let seqType = randomInt(0, 1);
+        let seqType = randomInt(0, 2);
 
         if (seqType == 0) {
           // addSeq
@@ -195,6 +199,29 @@
             Answer: ${answer}
 
             Explanation: ${incAddSeqExplan(start, startAddSeq, addVal)}
+          `;
+        } else if (seqType == 2) {
+          // incAddSeq
+
+          let start = randomInt(-3, 3);
+          let multVal = randomInt(-3, 3);
+
+          let sequence = [];
+          for (let i = 0; i < 5; i++) {
+            sequence.push(multSeq(start, i, multVal));
+          }
+
+          sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
+
+          answer = [
+            multSeq(start, 5, multVal),
+            multSeq(start, 6, multVal),
+            multSeq(start, 7, multVal),
+          ].join(", ");
+          answerDisplay.innerText = `
+            Answer: ${answer}
+
+            Explanation: ${multSeqExplan(start, multVal)}
           `;
         }
       });
