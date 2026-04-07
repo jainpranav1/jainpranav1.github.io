@@ -140,10 +140,15 @@
         return r;
       }
 
+      function incDigSumExplan(start) {
+        return `Start at ${start}. Keep adding all the digits together and incrementing by the result.`;
+      }
+
       // random integer between min and max
       // min and max are integers (+, -, 0)
       function randomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+        let res = Math.floor(Math.random() * (max - min + 1) + min);
+        return res;
       }
 
       window.addEventListener("DOMContentLoaded", () => {
@@ -159,8 +164,7 @@
         - digSumSeq
         */
 
-        // let seqType = randomInt(0, 3);
-        let seqType = 4;
+        let seqType = randomInt(0, 3);
 
         if (seqType == 0) {
           // addSeq
@@ -277,6 +281,28 @@
             Answer: ${answer}
 
             Explanation: ${incFibSeqExplan(start)}
+          `;
+        } else if (seqType == 5) {
+          // digSumSeq
+
+          let start = randomInt(-30, 30);
+
+          let sequence = [];
+          for (let i = 0; i < 5; i++) {
+            sequence.push(digSumSeq(start, i));
+          }
+
+          sequenceDisplay.innerText = sequence.join(", ") + ", ?, ?, ?";
+
+          answer = [
+            digSumSeq(start, 5),
+            digSumSeq(start, 6),
+            digSumSeq(start, 7),
+          ].join(", ");
+          answerDisplay.innerText = `
+            Answer: ${answer}
+
+            Explanation: ${incDigSumExplan(start)}
           `;
         }
       });
