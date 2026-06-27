@@ -101,6 +101,26 @@
 
       <wa-card class="card-basic">
         <div id="kaprekarWindow">
+          <wa-details summary="What is the Kaprekar Procedure?">
+            <ol>
+              <li>Choose a number from 1 to 9999.</li>
+              <li>Pad it to 4 digits with leading zeros if needed.</li>
+              <li>
+                Arrange the digits in descending order to form the largest
+                number.
+              </li>
+              <li>
+                Arrange the digits in ascending order to form the smallest
+                number.
+              </li>
+              <li>Subtract the smaller number from the larger number.</li>
+              <li>Repeat the process with the result.</li>
+            </ol>
+            <p>
+              If all digits are the same, the result becomes 0000. Otherwise,
+              repeating the steps will eventually reach 6174.
+            </p>
+          </wa-details>
           <wa-input
             id="kaprekarInput"
             type="number"
