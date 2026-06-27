@@ -26,7 +26,8 @@
       }
 
       function kaprekarProcedure(number) {
-        console.log(`Start Number: ${number}`);
+        let output = "";
+        output += `Start Number: ${number}\n`;
 
         let currNumber = number;
         let prevNumber = number + 1;
@@ -50,9 +51,7 @@
 
           let difference = numberGreatestToLeast - numberLeastToGreatest;
 
-          console.log(
-            `${numberGreatestToLeast} - ${numberLeastToGreatest} = ${difference}`,
-          );
+          output += `${numberGreatestToLeast} - ${numberLeastToGreatest} = ${difference}\n`;
 
           prevNumber = currNumber;
           currNumber = difference;
@@ -63,9 +62,11 @@
 
           iteration += 1;
         }
+
+        return output;
       }
 
-      kaprekarProcedure(1429);
+      console.log(kaprekarProcedure(1429));
 
       //   function experimentalWay() {
       //     console.log("Experimental way is enabled");
