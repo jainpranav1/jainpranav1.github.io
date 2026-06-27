@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feature Flagging Demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
+    ></script>
+    <style>
+      #main {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    </style>
+    <script type="module" defer>
+      import { withFeatureFlag } from "./featureFlags.js";
+
+      function currentWay() {
+        console.log("Curent way is enabled");
+      }
+
+      function experimentalWay() {
+        console.log("Experimental way is enabled");
+      }
+
+      const currentWayFlagged = withFeatureFlag(
+        "FEATURE_1",
+        currentWay,
+        experimentalWay,
+      );
+
+      currentWayFlagged(); // runs only if FEATURE_1 is true
+    </script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Feature Flagging Demo</h1>
+    </div>
+  </body>
+</html>
