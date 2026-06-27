@@ -29,8 +29,7 @@
         let currNumber = number;
 
         for (let i = 0; i < 10; ++i) {
-          let numberString = String(currNumber);
-          let numberList = numberString.split("");
+          let numberList = String(currNumber).split("");
 
           let sortedNumberListLeastToGreatest = numberList.toSorted();
           let sortedNumberListGreatestToLeast =
