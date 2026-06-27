@@ -32,9 +32,13 @@
         console.log("Curent way is enabled");
       }
 
+      function padNumber(number) {
+        return String(number).padStart(4, "0");
+      }
+
       function kaprekarProcedure(number) {
         let output = "";
-        output += `Start Number: ${number}\n`;
+        output += `Start Number: ${padNumber(number)}\n`;
 
         let currNumber = number;
         let prevNumber = number + 1;
@@ -43,7 +47,7 @@
         const MAX_ITERATIONS = 1000;
 
         while (iteration < MAX_ITERATIONS) {
-          const numberList = String(currNumber).split("");
+          const numberList = padNumber(currNumber).split("");
           const sortedNumberListLeastToGreatest = numberList.toSorted();
           const sortedNumberListGreatestToLeast =
             sortedNumberListLeastToGreatest.toReversed();
@@ -56,7 +60,7 @@
           );
           const difference = numberGreatestToLeast - numberLeastToGreatest;
 
-          output += `${numberGreatestToLeast} - ${numberLeastToGreatest} = ${difference}\n`;
+          output += `${padNumber(numberGreatestToLeast)} - ${padNumber(numberLeastToGreatest)} = ${padNumber(difference)}\n`;
 
           prevNumber = currNumber;
           currNumber = difference;
@@ -68,7 +72,7 @@
           iteration += 1;
         }
 
-        output += `Result: ${currNumber}`;
+        output += `Result: ${padNumber(currNumber)}`;
         return output;
       }
 
