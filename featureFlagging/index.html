@@ -26,9 +26,15 @@
       }
 
       function kaprekarProcedure(number) {
-        let currNumber = number;
+        console.log(`Start Number: ${number}`);
 
-        for (let i = 0; i < 10; ++i) {
+        let currNumber = number;
+        let prevNumber = number + 1;
+
+        let iteration = 0;
+        let MAX_ITERATIONS = 1000;
+
+        while (iteration < MAX_ITERATIONS) {
           let numberList = String(currNumber).split("");
 
           let sortedNumberListLeastToGreatest = numberList.toSorted();
@@ -42,12 +48,20 @@
             sortedNumberListLeastToGreatest.join(""),
           );
 
-          console.log(`${numberGreatestToLeast} - ${numberLeastToGreatest}`);
           let difference = numberGreatestToLeast - numberLeastToGreatest;
 
-          console.log(difference);
+          console.log(
+            `${numberGreatestToLeast} - ${numberLeastToGreatest} = ${difference}`,
+          );
 
+          prevNumber = currNumber;
           currNumber = difference;
+
+          if (currNumber === prevNumber) {
+            break;
+          }
+
+          iteration += 1;
         }
       }
 
