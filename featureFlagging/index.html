@@ -25,17 +25,42 @@
         console.log("Curent way is enabled");
       }
 
-      function experimentalWay() {
-        console.log("Experimental way is enabled");
+      function kaprekarProcedure(number) {
+        let currNumber = number;
+
+        for (let i = 0; i < 10; ++i) {
+          let numberString = String(currNumber);
+          let numberList = numberString.split("");
+
+          let sortedNumberListLeastToGreatest = numberList.toSorted();
+          let sortedNumberListGreatestToLeast =
+            sortedNumberListLeastToGreatest.toReversed();
+
+          let numberGreatestToLeast = Number(
+            sortedNumberListGreatestToLeast.join(""),
+          );
+          let numberLeastToGreatest = Number(
+            sortedNumberListLeastToGreatest.join(""),
+          );
+
+          console.log(`${numberGreatestToLeast} - ${numberLeastToGreatest}`);
+          let difference = numberGreatestToLeast - numberLeastToGreatest;
+
+          console.log(difference);
+
+          currNumber = difference;
+        }
       }
 
-      const currentWayFlagged = withFeatureFlag(
-        "FEATURE_1",
-        currentWay,
-        experimentalWay,
-      );
+      kaprekarProcedure(1429);
 
-      currentWayFlagged(); // runs only if FEATURE_1 is true
+      //   function experimentalWay() {
+      //     console.log("Experimental way is enabled");
+      //   }
+
+      //   const currentWayFlagged = withFeatureFlag("FEATURE_1", kaprekarProcedure);
+
+      //   currentWayFlagged(); // runs only if FEATURE_1 is true
     </script>
   </head>
   <body>
