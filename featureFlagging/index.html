@@ -18,6 +18,12 @@
         margin-left: 10px;
         margin-right: 10px;
       }
+
+      #kaprekarWindow {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
     </style>
     <script type="module" defer>
       import { withFeatureFlag } from "./featureFlags.js";
@@ -34,23 +40,21 @@
         let prevNumber = number + 1;
 
         let iteration = 0;
-        let MAX_ITERATIONS = 1000;
+        const MAX_ITERATIONS = 1000;
 
         while (iteration < MAX_ITERATIONS) {
-          let numberList = String(currNumber).split("");
-
-          let sortedNumberListLeastToGreatest = numberList.toSorted();
-          let sortedNumberListGreatestToLeast =
+          const numberList = String(currNumber).split("");
+          const sortedNumberListLeastToGreatest = numberList.toSorted();
+          const sortedNumberListGreatestToLeast =
             sortedNumberListLeastToGreatest.toReversed();
 
-          let numberGreatestToLeast = Number(
+          const numberGreatestToLeast = Number(
             sortedNumberListGreatestToLeast.join(""),
           );
-          let numberLeastToGreatest = Number(
+          const numberLeastToGreatest = Number(
             sortedNumberListLeastToGreatest.join(""),
           );
-
-          let difference = numberGreatestToLeast - numberLeastToGreatest;
+          const difference = numberGreatestToLeast - numberLeastToGreatest;
 
           output += `${numberGreatestToLeast} - ${numberLeastToGreatest} = ${difference}\n`;
 
@@ -64,24 +68,41 @@
           iteration += 1;
         }
 
+        output += `Result: ${currNumber}`;
         return output;
       }
 
-      console.log(kaprekarProcedure(1429));
+      function renderKaprekarResult(value) {
+        const outputCard = document.getElementById("kaprekarOutput");
+        outputCard.textContent = kaprekarProcedure(value);
+      }
 
-      //   function experimentalWay() {
-      //     console.log("Experimental way is enabled");
-      //   }
+      document.addEventListener("DOMContentLoaded", () => {
+        const runButton = document.getElementById("kaprekarRunButton");
+        const inputField = document.getElementById("kaprekarInput");
 
-      //   const currentWayFlagged = withFeatureFlag("FEATURE_1", kaprekarProcedure);
-
-      //   currentWayFlagged(); // runs only if FEATURE_1 is true
+        runButton.addEventListener("click", () => {
+          renderKaprekarResult(inputField.value);
+        });
+      });
     </script>
   </head>
   <body>
     <div id="main">
       <h1>Feature Flagging Demo</h1>
-      <wa-button variant="brand">Click me!</wa-button>
+
+      <wa-card class="card-basic">
+        <div id="kaprekarWindow">
+          <wa-input
+            id="kaprekarInput"
+            label="Enter a number like 1429"
+          ></wa-input>
+          <wa-button id="kaprekarRunButton" variant="primary"
+            >Run Kaprekar</wa-button
+          >
+          <pre id="kaprekarOutput"></pre>
+        </div>
+      </wa-card>
     </div>
   </body>
 </html>
