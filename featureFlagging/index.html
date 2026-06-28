@@ -26,11 +26,10 @@
       }
     </style>
     <script type="module" defer>
-      import { withFeatureFlag } from "./featureFlags.js";
-
-      function currentWay() {
-        console.log("Curent way is enabled");
-      }
+      export const FEATURE_FLAGS = {
+        SHOW_NUMBER_OF_STEPS: true,
+        FEATURE_2: false,
+      };
 
       function padNumber(number) {
         return String(number).padStart(4, "0");
@@ -77,6 +76,12 @@
         }
 
         output += `Result: ${padNumber(currNumber)}`;
+
+        if (FEATURE_FLAGS.SHOW_NUMBER_OF_STEPS) {
+          output += `\n`;
+          output += `Number of steps taken: ${iteration}`;
+        }
+
         return output;
       }
 
