@@ -28,8 +28,10 @@
     <script type="module" defer>
       export const FEATURE_FLAGS = {
         SHOW_NUMBER_OF_STEPS: true,
-        FEATURE_2: false,
+        STORE_PREVIOUS_RUNS: true,
       };
+
+      const previousRuns = ["Previous Runs:"];
 
       function padNumber(number) {
         return String(number).padStart(4, "0");
@@ -82,12 +84,23 @@
           output += `Number of steps taken: ${iteration}`;
         }
 
+        if (FEATURE_FLAGS.STORE_PREVIOUS_RUNS) {
+          previousRuns.push(output);
+          renderPreviousRuns(previousRuns);
+        }
+
         return output;
       }
 
       function renderKaprekarResult(value) {
         const outputCard = document.getElementById("kaprekarOutput");
         outputCard.textContent = kaprekarProcedure(value);
+      }
+
+      function renderPreviousRuns(runs) {
+        const outputCard = document.getElementById("previousRuns");
+        outputCard.hidden = false;
+        outputCard.textContent = runs.join("\n\n");
       }
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -135,6 +148,7 @@
             >Run Kaprekar</wa-button
           >
           <pre id="kaprekarOutput"></pre>
+          <pre id="previousRuns" hidden="true"></pre>
         </div>
       </wa-card>
     </div>
